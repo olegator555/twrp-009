@@ -1,23 +1,17 @@
 {
   "global": {
-    "title": "JhipsterApplication",
+    "title": "Онлайн склад",
     "browsehappy": "Ваш браузер <strong>устарел</strong>. Пожалуйста <a href=\"http://browsehappy.com/?locale=ru\">обновите ваш браузер</a>.",
     "menu": {
       "home": "Главная",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Сущности",
+        "good": "Good",
+        "order": "Order",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
-      "account": {
-        "main": "Профиль",
-        "settings": "Настройки",
-        "password": "Пароль",
-        "sessions": "Сессии",
-        "login": "Войти",
-        "logout": "Выйти",
-        "register": "Зарегистрироваться"
-      },
+
       "admin": {
         "main": "Администрирование",
         "userManagement": "Управление пользователями",
@@ -142,5 +136,5 @@
       "not.image": "Файл должен был быть изображением, но было установлено, что \"{{ fileType }}\""
     }
   },
-  "footer": "Это ваш футтер"
+  "footer": "© Шашко Олег. РК6-71Б, 2023"
 }
