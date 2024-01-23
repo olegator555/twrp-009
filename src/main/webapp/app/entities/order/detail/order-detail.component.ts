@@ -63,8 +63,7 @@ export class OrderDetailComponent implements OnInit {
     this.orderService.decrementGoodsCountOnShip(this.goodsInOrder).subscribe(() => {
       this.isSaving = false;
     });
-    this.orderService.delete(<string>this.order?.id);
-    this.previousState();
+    this.orderService.delete(<string>this.order?.id).subscribe(() => this.previousState());
   }
 
   delete(order: any): void {}
