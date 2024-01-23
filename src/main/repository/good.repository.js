@@ -32,6 +32,13 @@ export class GoodRepository {
     });
   }
 
+  updateAmountById(id, amount) {
+    console.log('Updated good amount');
+    return db.tx(async transaction => {
+      await transaction.none('UPDATE "twrp-009".good SET amount = $1 where id = $2', [amount, id]);
+    });
+  }
+
   save(name, amount) {
     return db.tx(async transaction => {
       await transaction.none('INSERT INTO "twrp-009".good VALUES(default, $1, $2)', [amount, name]);

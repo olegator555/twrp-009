@@ -43,25 +43,41 @@ export class GoodsController {
       const id = req.params.id;
       const amount = req.body.amount;
       const name = req.body.name;
-      this.goodRepository.updateById(id, name, amount).then(results => {
-        res.status(200).json(results);
-        console.log('Successfully updated good with id ' + id);
-      });
-      console.log('From new goods controller');
+      this.goodRepository
+        .updateById(id, name, amount)
+        .then(results => {
+          res.status(200).json(results);
+          console.log('Successfully updated good with id ' + id);
+        })
+        .catch(err => this.onQueryError(err));
     });
 
     router.post('/api/goods', (req, res) => {
       const amount = req.body.amount;
       const name = req.body.name;
-      this.goodRepository.save(name, amount).then(results => {
-        res.status(200).json(results);
-      });
-      console.log('From new goods controller');
+      this.goodRepository
+        .save(name, amount)
+        .then(results => {
+          res.status(200).json(results);
+        })
+        .catch(err => this.onQueryError(err));
     });
 
     router.delete('/api/goods/:id', (req, res) => {
       const id = req.params.id;
-      this.goodRepository.deleteById(id).then(results => {
+      this.goodRepository
+        .deleteById(id)
+        .then(results => {
+          res.status(200).json(results);
+          console.log('Successfully updated good with id ' + id);
+        })
+        .catch(err => this.onQueryError(err));
+    });
+
+    router.put('/api/goods/amount/:id', (req, res) => {
+      const id = req.params.id;
+      const amount = req.body.amount;
+      this.goodRepository.updateAmountById(id, amount).then(results => {
         res.status(200).json(results);
         console.log('Successfully updated good with id ' + id);
       });

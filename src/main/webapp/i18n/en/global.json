@@ -91,7 +91,9 @@
       "open": "Open",
       "save": "Save",
       "view": "View",
-      "show": "Show {{otherEntity}}"
+      "show": "Show {{otherEntity}}",
+      "ship": "Ship",
+      "bringTomorrow": "Bring tomorrow"
     },
     "detail": {
       "field": "Field",

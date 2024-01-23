@@ -36,4 +36,11 @@ export class OrderRepository {
       await transaction.none('DELETE FROM "twrp-009".order_info WHERE id = $1', [id]);
     });
   }
+
+  deleteExpiredOrdersOnStartup() {
+    console.log('Удаление истекших заказов...');
+    return db.tx(async transaction => {
+      await transaction.none('delete from "twrp-009".order_info where date < CURRENT_TIMESTAMP', []);
+    });
+  }
 }

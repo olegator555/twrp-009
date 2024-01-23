@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import dayjs from 'dayjs/esm';
 
@@ -9,6 +9,8 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IOrder, NewOrder } from '../order.model';
 import { ASC, DESC } from '../../../config/navigation.constants';
+import { IGoodInOrder } from '../good-in-order/good-in-order.model';
+import { GoodService } from '../../good/service/good.service';
 
 export type PartialUpdateOrder = Partial<IOrder> & Pick<IOrder, 'id'>;
 
@@ -32,7 +34,11 @@ export class OrderService {
 
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/orders');
 
-  constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
+  constructor(
+    protected http: HttpClient,
+    protected applicationConfigService: ApplicationConfigService,
+    protected goodService: GoodService
+  ) {}
 
   create(order: NewOrder): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(order);
@@ -131,5 +137,14 @@ export class OrderService {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+
+  decrementGoodsCountOnShip(goodsInOrder: IGoodInOrder[]): Observable<HttpResponse<{}>[]> {
+    return combineLatest(
+      goodsInOrder.map(goodInOrder => {
+        let diff = <number>goodInOrder.good_amount - <number>goodInOrder.good_in_order_amount;
+        return this.goodService.updateAmountByGoodId(<string>goodInOrder.good_id, diff);
+      })
+    );
   }
 }

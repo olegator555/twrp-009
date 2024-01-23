@@ -39,7 +39,6 @@ export class OrderUpdateComponent implements OnInit {
     protected orderFormService: OrderFormService,
     protected activatedRoute: ActivatedRoute,
     protected goodInOrderService: GoodInOrderService,
-    protected addGoodInOrderService: AddGoodInOrderService,
     protected modalService: NgbModal
   ) {}
 

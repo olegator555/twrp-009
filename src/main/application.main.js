@@ -1,5 +1,5 @@
 import { app } from './express/express.initializer.js';
-import { db } from './db/mysql.connector.js';
+import { db, deleteExpiredOrdersOnStartup } from './db/mysql.connector.js';
 
 /*const connection = mysql.createConnection({
   host: '127.0.0.1',
@@ -12,6 +12,12 @@ import { db } from './db/mysql.connector.js';
 
 db.connect().then(() => {
   console.log('Connected to database successfully!');
+  deleteExpiredOrdersOnStartup()
+    .then(console.log('Удаление успешно!'))
+    .catch(err => {
+      console.log('Ошибка при удалении истекших заказов');
+      console.log(err);
+    });
 });
 
 //connection.connect();

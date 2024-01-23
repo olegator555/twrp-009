@@ -24,6 +24,16 @@
         </dd>
       </dl>
 
+      <button type="button" (click)="bringTomorrow()" class="btn btn-primary">
+        <span *ngIf="!isSaving" jhiTranslate="entity.action.bringTomorrow"></span>
+        <div *ngIf="isSaving" class="spinner-border spinner-border-sm text-dark">
+          <span class="visually-hidden">Loading..</span>
+        </div>
+      </button>
+
+      <br />
+      <br />
+
       <h2 data-cy="orderDetailsHeading"><span jhiTranslate="jhipsterApplicationApp.order.goods"></span></h2>
 
       <hr />
@@ -61,11 +71,21 @@
       </div>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Назад</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"></span>
       </button>
 
       <button type="button" [routerLink]="['/order', order.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Изменить</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"></span>
+      </button>
+
+      <button type="button" (click)="shipOrder()" class="btn btn-success">
+        <ng-container *ngIf="!isSaving">
+          <fa-icon icon="check"></fa-icon>&nbsp;
+          <span jhiTranslate="entity.action.ship"></span>
+        </ng-container>
+        <div *ngIf="isSaving" class="spinner-border spinner-border-sm text-dark">
+          <span class="visually-hidden">Loading..</span>
+        </div>
       </button>
     </div>
   </div>

@@ -10,3 +10,10 @@ const connection = {
 
 const pgp = pgPromise({});
 export const db = pgp(connection);
+
+export function deleteExpiredOrdersOnStartup() {
+  console.log('Удаление истекших заказов...');
+  return db.tx(async transaction => {
+    await transaction.none('delete from "twrp-009".order_info where date < CURRENT_TIMESTAMP', []);
+  });
+}

@@ -26,6 +26,10 @@ export class GoodService {
     return this.http.put<IGood>(`${this.resourceUrl}/${this.getGoodIdentifier(good)}`, good, { observe: 'response' });
   }
 
+  updateAmountByGoodId(goodId: string, amount: number): Observable<EntityResponseType> {
+    return this.http.put<IGood>(`${this.resourceUrl}/amount/${goodId}`, { amount: amount }, { observe: 'response' });
+  }
+
   partialUpdate(good: PartialUpdateGood): Observable<EntityResponseType> {
     return this.http.patch<IGood>(`${this.resourceUrl}/${this.getGoodIdentifier(good)}`, good, { observe: 'response' });
   }

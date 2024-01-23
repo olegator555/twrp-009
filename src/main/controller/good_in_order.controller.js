@@ -19,10 +19,9 @@ export class GoodInOrderController {
 
     router.post('/api/goodInOrder/:orderId', (req, res) => {
       const orderId = req.params.orderId;
-      const good_amount = req.body.good_amount;
+      const good_amount = req.body.good_in_order_amount;
       const good_id = req.body.good_id;
 
-      console.log('orderId: ' + orderId + ' good_amount: ' + good_amount + ' good_id: ' + good_id);
       this.goodInOrderRepository
         .addNewGoodToOrder(good_id, orderId, good_amount)
         .then(results => {
